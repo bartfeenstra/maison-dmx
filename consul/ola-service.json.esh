@@ -2,10 +2,10 @@
     "name": "ola",
     "tags": ["maison-web", "maison-web-auth"],
     "address": "<%= $MAISON_DMX_ADVERTISE_IP %>",
-    "port": 9090,
+    "port": 9091,
     "checks": [
         {
-            "http": "http://<%= $MAISON_DMX_ADVERTISE_IP %>:9090",
+            "http": "http://<%= $MAISON_DMX_ADVERTISE_IP %>:9091",
             "interval": "2s"
         }
     ]
