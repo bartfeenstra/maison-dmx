@@ -4,7 +4,7 @@ services:
     image: 'bartfeenstra/ola:${MAISON_DMX_OLA_IMAGE_VERSION}'
     restart: always
     ports:
-     - '9090:9090'
+     - '9091:9090'
     environment:
       OLA_PLUGIN_FTDIDMX: 1
     # The FTDI USB device we need can be (un)mounted at any time, and as any /dev/ttyUSB* device. Because we trust this
