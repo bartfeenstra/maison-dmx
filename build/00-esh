@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Set up ESH.
+
+set -Eeuo pipefail
+
+cd "$(dirname "$0")/.."
+
+mkdir -p ./vendor
+if [ ! -f ./vendor/esh ]; then
+    curl https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh > ./vendor/wait-for-it
+    wget https://raw.githubusercontent.com/jirutka/esh/v0.1.1/esh -O ./vendor/esh \
+    && echo '2a992f8b74cb47f8b0e36dfb4c16061d3042bfaa ./vendor/esh' | sha1sum -c \
+    || exit 1
+fi
+chmod ugo+rx ./vendor/esh

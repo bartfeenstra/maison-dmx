@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+cd "$(dirname "$0")/.."
+
+set -a
+. ./run/.env
+set +a
+
+if [ -z $MAISON_DMX_CONSUL_ADDRESS ]; then
+    exit 0
+fi
+
+address="$MAISON_DMX_CONSUL_ADDRESS:8500"
+api_root="http://$address/v1"
+./vendor/wait-for-it "$address"
+service_definition=$(mktemp)
+./vendor/esh -o "$service_definition" "./consul/ola-service.json.esh"
+./vendor/krab/bin/krab stdio-inform "Registering service 'ola'..."
+curl -f -X PUT --header "X-Consul-Token: $MAISON_DMX_CONSUL_TOKEN" --header "Content-Type: application/json" --data "@$service_definition" "$api_root/agent/service/register"
+rm "$service_definition"
+./vendor/krab/bin/krab stdio-inform "Service registration complete. Reloading Consul..."
+curl -f -X PUT --header "X-Consul-Token: $MAISON_DMX_CONSUL_TOKEN" "$api_root/agent/reload"
