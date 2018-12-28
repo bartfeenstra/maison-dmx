@@ -2,6 +2,7 @@ version: '3.4'
 services:
   ola:
     image: 'bartfeenstra/ola:${MAISON_DMX_OLA_IMAGE_VERSION}'
+    container_name: maison_dmx_ola
     restart: always
     ports:
      - '9091:9090'

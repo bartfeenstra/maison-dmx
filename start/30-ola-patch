@@ -7,5 +7,5 @@ cd "$(dirname "$0")/.."
 
 # Patch the output.
 if [ ! -z "${MAISON_DMX_OLA_OUTPUT_DEVICE}" ] && [ ! -z "${MAISON_DMX_OLA_OUTPUT_PORT}" ]; then
-    docker exec maison_ola_1 ola_patch -u ${MAISON_DMX_OLA_UNIVERSE} -d ${MAISON_DMX_OLA_OUTPUT_DEVICE} -p ${MAISON_DMX_OLA_OUTPUT_PORT}
+    docker exec maison_dmx_ola ola_patch -u ${MAISON_DMX_OLA_UNIVERSE} -d ${MAISON_DMX_OLA_OUTPUT_DEVICE} -p ${MAISON_DMX_OLA_OUTPUT_PORT}
 fi
