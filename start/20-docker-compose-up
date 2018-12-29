@@ -5,3 +5,4 @@ set -Eeuo pipefail
 cd "$(dirname "$0")/.."
 
 docker-compose -p maison_dmx up -d
+./bin/await
