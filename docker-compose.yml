@@ -5,8 +5,10 @@ services:
     container_name: maison_dmx_ola
     restart: always
     ports:
+     - '6454:6454/udp'
      - '9091:9090'
     environment:
+      OLA_PLUGIN_ARTNET: 1
       OLA_PLUGIN_FTDIDMX: 1
     # The FTDI USB device we need can be (un)mounted at any time, and as any /dev/ttyUSB* device. Because we trust this
     # container, we run it in privileged mode and allow access to any device, so we can choose the right one runtime.
