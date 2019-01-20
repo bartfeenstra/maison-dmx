@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
-# Set up shUnit2.
 
 set -Eeuo pipefail
 
 cd "$(dirname "$0")/.."
 
-# Patch the output.
+# Patch the output. OLA needs a second to find the output device.
+sleep 1
 if [ ! -z "${MAISON_DMX_OLA_OUTPUT_DEVICE}" ] && [ ! -z "${MAISON_DMX_OLA_OUTPUT_PORT}" ]; then
-    docker exec maison_dmx_ola ola_patch -u ${MAISON_DMX_OLA_UNIVERSE} -d ${MAISON_DMX_OLA_OUTPUT_DEVICE} -p ${MAISON_DMX_OLA_OUTPUT_PORT}
+	result=$(docker exec maison_dmx_ola ola_patch -u ${MAISON_DMX_OLA_UNIVERSE} -d ${MAISON_DMX_OLA_OUTPUT_DEVICE} -p ${MAISON_DMX_OLA_OUTPUT_PORT} 2>&1)
+	>&2 echo "$result"
+	test "$result" != "Device doesn't exist"
 fi
