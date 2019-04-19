@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+esh -o /maison-ola/conf/ola-artnet.conf.esh /usr/lib/olad/.ola/ola-artnet.conf
+
+olad

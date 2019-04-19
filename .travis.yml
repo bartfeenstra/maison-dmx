@@ -13,7 +13,6 @@ addons:
 before_script:
   - ./bin/build
   - ./bin/start
-  - ./bin/migrate
 
 script:
   - ./bin/test

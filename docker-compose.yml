@@ -1,8 +1,9 @@
 version: '3.4'
 services:
   ola:
-    image: 'bartfeenstra/ola:${MAISON_DMX_OLA_IMAGE_VERSION}'
+    image: 'maison-ola'
     container_name: maison_dmx_ola
+    build: ./services/ola
     restart: always
     ports:
      - '6454:6454/udp'
