@@ -4,8 +4,17 @@ set -Eeuo pipefail
 
 cd "$(dirname "$0")/.."
 
-# Patch the output. OLA needs a second to find the output device.
+# OLA needs a second to find the devices.
 sleep 1
+
+# Patch the input.
+if [ ! -z "${MAISON_DMX_OLA_INPUT_DEVICE}" ] && [ ! -z "${MAISON_DMX_OLA_INPUT_PORT}" ]; then
+	result=$(docker exec maison_dmx_ola ola_patch -i -u ${MAISON_DMX_OLA_UNIVERSE} -d ${MAISON_DMX_OLA_INPUT_DEVICE} -p ${MAISON_DMX_OLA_INPUT_PORT} 2>&1)
+	>&2 echo "$result"
+	test "$result" != "Device doesn't exist"
+fi
+
+# Patch the output.
 if [ ! -z "${MAISON_DMX_OLA_OUTPUT_DEVICE}" ] && [ ! -z "${MAISON_DMX_OLA_OUTPUT_PORT}" ]; then
 	result=$(docker exec maison_dmx_ola ola_patch -u ${MAISON_DMX_OLA_UNIVERSE} -d ${MAISON_DMX_OLA_OUTPUT_DEVICE} -p ${MAISON_DMX_OLA_OUTPUT_PORT} 2>&1)
 	>&2 echo "$result"
