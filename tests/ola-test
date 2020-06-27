@@ -5,4 +5,4 @@ set -Eeuo pipefail
 
 cd "$(dirname "$0")/.."
 
-curl -fsSL -D - -o /dev/null localhost:9091
+curl -fsSL -D - -o /dev/null localhost:9090
