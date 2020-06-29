@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+cd "$(dirname "$0")/.."
+
+. ./.env
+
+target=/etc/udev/rules.d/maison-ola-ftdi.rules
+new_rules=$(docker exec -t maison_dmx_ola /bin/cat /etc/udev/rules.d/ftdi.rules)
+./vendor/krab/bin/krab stdio-inform "Updating udev rules in $target..."
+sudo bash -c "echo '$new_rules' > '$target'"
+echo "$new_rules" | sudo tee -a "$target" > /dev/null
