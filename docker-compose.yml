@@ -11,3 +11,7 @@ services:
     ports:
      - '9090:9090'
      - '6454:6454/udp'
+    networks:
+     maison:
+       aliases:
+         - dmx
